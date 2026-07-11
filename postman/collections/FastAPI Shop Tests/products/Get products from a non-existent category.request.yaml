@@ -1,0 +1,23 @@
+$kind: http-request
+name: Get products from a non-existent category
+url: "{{base_url}}/api/products/category/9999"
+method: GET
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"Status code is 404\", function () {\r
+
+      \    pm.response.to.have.status(404);\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Error message is correct\", function () {\r
+
+      \    var jsonData = pm.response.json();\r
+
+      \    pm.expect(jsonData.detail).to.eql(\"Category with id 9999 not found\");\r
+
+      });"
+    language: text/javascript
+order: 4112375468187568

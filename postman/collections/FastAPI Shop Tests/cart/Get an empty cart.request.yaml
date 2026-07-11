@@ -1,0 +1,30 @@
+$kind: http-request
+name: Get an empty cart
+url: "{{base_url}}/api/cart"
+method: POST
+body:
+  type: json
+  content: "{}"
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"Status code is 200\", function () {\r
+
+      \    pm.response.to.have.status(200);\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Cart is empty\", function () {\r
+
+      \    var jsonData = pm.response.json();\r
+
+      \    pm.expect(jsonData.items).to.be.an('array').that.is.empty;\r
+
+      \    pm.expect(jsonData.total).to.eql(0);\r
+
+      \    pm.expect(jsonData.items_count).to.eql(0);\r
+
+      });"
+    language: text/javascript
+order: 4325431439348523

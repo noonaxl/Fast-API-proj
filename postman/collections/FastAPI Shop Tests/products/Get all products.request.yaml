@@ -1,0 +1,71 @@
+$kind: http-request
+name: Get all products
+url: "{{base_url}}/api/products"
+method: GET
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"Status code is 200\", function () {\r
+
+      \    pm.response.to.have.status(200);\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Response has products and total\", function () {\r
+
+      \    var jsonData = pm.response.json();\r
+
+      \    pm.expect(jsonData).to.have.property('products');\r
+
+      \    pm.expect(jsonData).to.have.property('total');\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Products is an array\", function () {\r
+
+      \    var jsonData = pm.response.json();\r
+
+      \    pm.expect(jsonData.products).to.be.an('array');\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Product has complete structure\", function () {\r
+
+      \    var jsonData = pm.response.json();\r
+
+      \    if (jsonData.products.length > 0) {\r
+
+      \        var product = jsonData.products[0];\r
+
+      \        pm.expect(product).to.have.property('id');\r
+
+      \        pm.expect(product).to.have.property('name');\r
+
+      \        pm.expect(product).to.have.property('price');\r
+
+      \        pm.expect(product).to.have.property('category');\r
+
+      \        pm.expect(product.category).to.have.property('id');\r
+
+      \        pm.expect(product.category).to.have.property('name');\r
+
+      \    }\r
+
+      });\r
+
+      \r
+
+      // Сохраняем ID первого товара\r
+
+      if (pm.response.json().products.length > 0) {\r
+
+      \    pm.environment.set(\"product_id\", pm.response.json().products[0].id);\r
+
+      }"
+    language: text/javascript
+order: 1783787635338

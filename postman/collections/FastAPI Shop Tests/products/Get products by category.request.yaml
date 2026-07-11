@@ -1,0 +1,31 @@
+$kind: http-request
+name: Get products by category
+url: "{{base_url}}/api/products/category/{{category_id}}"
+method: GET
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"Status code is 200\", function () {\r
+
+      \    pm.response.to.have.status(200);\r
+
+      });\r
+
+      \r
+
+      pm.test(\"All products belong to specified category\", function () {\r
+
+      \    var jsonData = pm.response.json();\r
+
+      \    var categoryId = parseInt(pm.environment.get(\"category_id\"));\r
+
+      \r
+
+      \    jsonData.products.forEach(function(product) {\r
+
+      \        pm.expect(product.category_id).to.eql(categoryId);\r
+
+      \    });\r
+
+      });"
+    language: text/javascript
+order: 2880242200873589

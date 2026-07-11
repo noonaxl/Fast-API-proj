@@ -1,0 +1,54 @@
+$kind: http-request
+name: Add another product
+url: "{{base_url}}/api/cart/add"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"product_id\": 2,\r
+
+    \  \"quantity\": 1,\r
+
+    \  \"cart\": {{cart}}\r
+
+    }"
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"Status code is 200\", function () {\r
+
+      \          pm.response.to.have.status(200);\r
+
+      \      });\r
+
+      \r
+
+      \      pm.test(\"Cart contains newly added product\", function () {\r
+
+      \          var jsonData = pm.response.json();\r
+
+      \          pm.expect(jsonData.cart).to.have.property('2');\r
+
+      \          pm.expect(jsonData.cart['2']).to.eql(1);\r
+
+      \      });\r
+
+      \r
+
+      \      pm.test(\"Cart still contains previously added product\", function () {\r
+
+      \          var jsonData = pm.response.json();\r
+
+      \          pm.expect(jsonData.cart).to.have.property('1');\r
+
+      \          pm.expect(jsonData.cart['1']).to.eql(2);\r
+
+      \      });\r
+
+      \r
+
+      \      // Save updated cart for subsequent requests\r
+
+      \      pm.environment.set(\"cart\", JSON.stringify(pm.response.json().cart));"
+    language: text/javascript
+order: 2898845940486899
