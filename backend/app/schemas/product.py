@@ -9,7 +9,7 @@ class ProductBase(BaseModel):
     description: Optional[str] = Field(None, description="Product description")
     price: float = Field(..., gt=0, description="Product price(must be greater than 0)")
     category_id: int = Field(..., description="Product category id")
-    image_url: Optional[str] = Field(None, description="Product image URL")
+    image: Optional[str] = Field(None, description="Product image URL")
 
 
 class ProductCreate(ProductBase):
@@ -22,7 +22,7 @@ class ProductResponse(BaseModel):
     description: Optional[str]
     price: float
     category_id: int
-    image_url: Optional[str]
+    image: Optional[str]
     created_at: datetime
     category: CategoryResponse = Field(..., description="Product category details")
 
