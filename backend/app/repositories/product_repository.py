@@ -3,6 +3,7 @@ from typing import List, Optional
 from ..models.product import Product
 from ..schemas.product import ProductCreate
 
+
 class ProductRepository():
     def __init__(self, db: Session):
         self.db = db
@@ -15,13 +16,13 @@ class ProductRepository():
                 .options(joinedload(Product.category))
                 .filter(Product.id == product_id)
                 .first()
-        )
+                )
 
-    def get_by_category_id(self, category_id: int) -> List[Product]: 
-            return (self.db.query(Product)
-                    .options(joinedload(Product.category))
-                    .filter(Product.category_id == category_id)
-                    .all())
+    def get_by_category_id(self, category_id: int) -> List[Product]:
+        return (self.db.query(Product)
+                .options(joinedload(Product.category))
+                .filter(Product.category_id == category_id)
+                .all())
 
     def create(self, product_data: ProductCreate) -> Product:
         db_product = Product(**product_data.model_dump())

@@ -3,6 +3,7 @@ from typing import List, Optional
 from ..models.category import Category
 from ..schemas.category import CategoryCreate
 
+
 class CategoryRepository():
     def __init__(self, db: Session):
         self.db = db
@@ -22,5 +23,3 @@ class CategoryRepository():
         self.db.commit()
         self.db.refresh(db_category)
         return db_category
-
-

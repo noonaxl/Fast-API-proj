@@ -3,15 +3,18 @@ from datetime import datetime
 from typing import Optional
 from .category import CategoryResponse
 
+
 class ProductBase(BaseModel):
-        name: str = Field(..., min_length=1, max_length=200, description="Product name")
-        description: Optional[str] = Field(None, description="Product description")
-        price: float = Field(..., gt=0, description="Product price(must be greater than 0)")
-        category_id: int = Field(..., description="Product category id")
-        image_url: Optional[str] = Field(None, description="Product image URL")
+    name: str = Field(..., min_length=1, max_length=200, description="Product name")
+    description: Optional[str] = Field(None, description="Product description")
+    price: float = Field(..., gt=0, description="Product price(must be greater than 0)")
+    category_id: int = Field(..., description="Product category id")
+    image_url: Optional[str] = Field(None, description="Product image URL")
+
 
 class ProductCreate(ProductBase):
     pass
+
 
 class ProductResponse(BaseModel):
     id: int = Field(..., description="Unique product ID")
@@ -25,7 +28,6 @@ class ProductResponse(BaseModel):
 
     class Config:
         from_attributes = True
-
 
 
 class ProductListResponse(BaseModel):
