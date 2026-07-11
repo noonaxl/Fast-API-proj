@@ -22,12 +22,20 @@ class CartService:
 
         return cart_data
 
-    def update_cart_item(self, cart_data: Dict[int, int], item: CartItemUpdate) -> Dict[int, int]:
-        if item.product_id not in cart_data:
-            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-                                detail=f'Product with id {item.product_id} not found')
+    def update_cart_item(
+            self,
+            cart_data: Dict[int, int],
+            item: CartItemUpdate
+    ) -> Dict[int, int]:
 
-        cart_data[item.product_id] += item.quantity
+        if item.product_id not in cart_data:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail=f"Product with id {item.product_id} not found"
+            )
+
+        cart_data[item.product_id] = item.quantity
+
         return cart_data
 
     def remove_from_cart(self, cart_data: Dict[int, int], product_id: int) -> Dict[int, int]:
