@@ -78,9 +78,5 @@ coverage
 shop.db
 
 *.tsbuildinfo
-.vscode
 celerybeat-schedule
 celerybeat-schedule-wal
-
-postman/globals
-postman/collections/.resources
