@@ -81,3 +81,6 @@ shop.db
 .vscode
 celerybeat-schedule
 celerybeat-schedule-wal
+
+postman/globals
+postman/collections/.resources
