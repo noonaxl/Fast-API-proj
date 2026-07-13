@@ -1,0 +1,10 @@
+name: FastAPI Shop
+values:
+  - key: base_url
+    value: ''
+  - key: product_id
+    value: ''
+  - key: category_id
+    value: ''
+  - key: cart
+    value: ''
