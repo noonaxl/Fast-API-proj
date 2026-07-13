@@ -80,3 +80,10 @@ shop.db
 *.tsbuildinfo
 celerybeat-schedule
 celerybeat-schedule-wal
+
+# Postman
+.postman/
+
+postman/*
+!postman/*.postman_collection.json
+!postman/*.postman_environment.json
