@@ -66,6 +66,18 @@ coverage
 /cypress/videos/
 /cypress/screenshots/
 
+# VS Code
+.vscode/
+
+# JetBrains
+.idea/
+
+# Python
+.venv/
+
+# Node
+node_modules/
+coverage/
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
